@@ -11,6 +11,7 @@
     <?php
 
     $nominal = array(100, 200, 500, 1000, 2000, 5000);
+    $kilkist = array(20, 20, 20, 20, 20, 20);
     $k=count($nominal);
     $F=Array();
     $F[0]=0;
@@ -18,12 +19,12 @@
 
     $sum = filter_input(INPUT_POST, 'suma') ? filter_input(INPUT_POST, 'suma') : 0;
 
-    echo "Ваша сума:   $sum <br>";
+    echo "Ваша сума:   $sum <br><br>";
     $ost = $sum%100;
     if ($sum < 100){
         echo "<strong>Ви ввели недостатню суму!!!</strong> <br><br>";
     }
-    else if ($sum > 1000000){
+    else if ($sum > 100000){
         echo "<strong>Ти шо, олігарх, тут таких грощей нема!!!</strong> <br><br>";
     }
     else if ($ost != 0){
@@ -39,19 +40,35 @@
             }
         }
 
-         echo "Ви отримали наступні банкноти  <br>";
-            while ($sum > 0) {
-                for ($i = 0; $i < $k; ++$i) {
-                    if ($F[$sum - $nominal[$i]] == $F[$sum] - 1) {
-                        echo $nominal[$i] . "<br>";
-                        $sum -= $nominal[$i];
-                        break;
-                    }
-                }
-            }
-         }
+        while ($sum > 0) {
+             for ($i = 0; $i < $k; ++$i) {
+                 if ($F[$sum - $nominal[$i]] == $F[$sum] - 1) {
+                    $kilkist[$i] = $kilkist[$i]-1;
+                    $sum -= $nominal[$i];
+                    break;
+                 }
+             }
+        }
 
-     ?>
+        echo "Ви отримали наступні банкноти  <br>";
+
+        for ($s = 0; $s < $k; ++$s) {
+              $ban = 20 - $kilkist[$s];
+              if($ban != 0){
+                   echo($nominal[$s] . " x " . $ban . "<br>");
+              }
+                 
+        }
+
+        echo "<br> В банкоматі залишилось купюр за номіналами <br>";
+
+        for ($s = 0; $s < $k; ++$s) {
+             echo ($nominal[$s] . " - " . $kilkist[$s]  . "<br>");
+        }
+
+    }
+
+    ?>
 
     <div>
         <br>

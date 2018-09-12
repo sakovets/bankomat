@@ -15,8 +15,16 @@
     $k=count($nominal);
     $F=Array();
     $F[0]=0;
+    $maxSum = 0;
     $INF=PHP_INT_MAX;
     $flag = true;
+
+    for($j = 0; $j < $k; ++$j){
+        $maxSum = $maxSum +($kilkist[$j] * $nominal[$j]);
+    }
+
+    echo "$maxSum";
+
 
     $sum = filter_input(INPUT_POST, 'suma') ? filter_input(INPUT_POST, 'suma') : 0;
 
@@ -25,7 +33,7 @@
     if ($sum < 100){
         echo "<strong>Ви ввели недостатню суму!!!</strong> <br><br>";
     }
-    else if ($sum > 100000){
+    else if ($sum > $maxSum){
         echo "<strong>Ти шо, олігарх, тут таких грощей нема!!!</strong> <br><br>";
     }
     else if ($ost != 0){
@@ -37,6 +45,7 @@
             for ($i = 0; $i < $k; ++$i) {
                 if ($m >= $nominal[$i] && $F[$m - $nominal[$i]] + 1 < $F[$m]) {
                     $F[$m] = $F[$m - $nominal[$i]] + 1;
+                    
                 }
             }
         }
@@ -51,11 +60,11 @@
              }
         }
 
-        for ($s = 0; $s < $k; ++$s) {
-            if($kilkist[$s] <0){
-                 $flag = false;
-            }
-        }
+ //       for ($s = 0; $s < $k; ++$s) {
+//            if($kilkist[$s] <0){
+//                 $flag = false;
+//            }
+//        }
 
 
         if($flag == true){

@@ -14,7 +14,7 @@
     <div>
         <hr>
         <p>Введіть суму кратну 100 грн.</p>
-        <form action="result.php" method="post" style="display: block; max-width: 350px;">
+        <form action="result2.php" method="post" style="display: block; max-width: 350px;">
 
                 <input type="number" name="suma">
 
